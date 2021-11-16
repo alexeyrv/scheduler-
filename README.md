@@ -1,5 +1,5 @@
 # scheduler-
-## CZU Team 8 non commercial project
+## non commercial project
 
 use it for your own risks
 
