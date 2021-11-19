@@ -182,9 +182,13 @@ const vm = new Vue({
       this.users[aToInd].usedUnits--;
       this.users[uInd].usedUnits++;
 
+      // assign to user the day
       this.$set( this.schedule[ (arrId[1]-1) ].days[ (arrId[2]-1) ], 
         'assignedTo',  this.selectedUserId );
       
+      // set isRejected value to 0
+      this.$set( this.schedule[ (arrId[1]-1) ].days[ (arrId[2]-1) ], 
+        'isRejected', 0 );      
 
       // let selectedUserObj = this.users.filter(obj => {
       //   return obj.id === this.selectedUserId;

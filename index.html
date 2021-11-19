@@ -97,7 +97,7 @@
             </li>
 
             <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
+            <hr class="sidebar-divider d-none d-md-block"> <!-- d-none  -->
             
             <!-- Nav Item - Utilities 2 Collapse Menu -->
             <li class="nav-item">
@@ -246,14 +246,14 @@
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
                     <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                    <!-- <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
-                    </button>
+                    </button> -->
 
                     <!-- Topbar Search -->
                     <!-- RA change to login fields -->
                     <form 
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        class=" d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div v-if="!currentUser.userInd" class="input-group">
                             <input v-model="lgn" 
                                 type="text" class="form-control bg-light border-0 small" 
@@ -290,14 +290,14 @@
 
                         <!-- Nav Item - Alerts -->
  
-                        <div class="topbar-divider d-none d-sm-block"></div>
+                        <div class="topbar-divider d-sm-block"></div> <!-- d-none  -->
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <div v-if="currentUser.userInd">
-                                  <span class="mr-2 d-none d-lg-inline text-gray-600 small">
+                                  <span class="mr-2  d-lg-inline text-gray-600 small"><!-- d-none  -->
                                     You are logged in.
                                   </span>
                                 <img class="img-profile rounded-circle"
@@ -341,7 +341,7 @@
                     <!-- Content Row -->
                     <div class="row">
 
-                        <!-- Earnings (Monthly) Card Example -->
+                        <!-- Schedule Card Example -->
                         <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-12" v-for="(month,monthInd) in schedule">
                             <div class="card border-left-primary shadow h-100 py-2">
                                 <div class="card-body">
@@ -354,12 +354,13 @@
 
                                                 <!-- v-for="(month,monthInd) in schedule" -->
                                                 <div  
-                                                style="width: 360px; user-select: none;"> 
+                                                style="width-min: 360px; user-select: none;"> 
                                             
-                                                  <div style=""><b> {{ months[monthInd] }} </b></div>
+                                                  <div  style=""><b> {{ months[monthInd] }} </b></div>
                                           
-                                                  <div id="dayNames" align="center" v-for="di in 7"
-                                                    style="min-width:40px;  user-select: none; border:black 2px solid; margin:5px; float:left">
+                                                  <div class="d-none "
+                                                  id="dayNames" align="center" v-for="di in 7"
+                                                    style="user-select: none; border:black 2px solid; min-width:35px; margin:2px; float:left">
                                                     {{ weekDays[di-1] }}
                                                   </div>
                                                   <div style="clear:both;"></div>
@@ -370,7 +371,7 @@
                                                   >
                                                     <!--  style="user-select: none; border:black 1px solid; width:30px; margin:2px; float:left" -->
                                                     <div v-for="ri in day.dayOfWeek"  v-if="ri <= day.dayOfWeek && dayInd === 0" 
-                                                    style="user-select: none; border:black 0px dotted; min-width:40px; margin:5px; float:left">
+                                                    style="user-select: none; border:rgb(0, 0, 0) 0px dotted; min-width:35px; margin:2px; float:left">
                                                         <!-- {{ri}} = {{dayInd}} -->
                                                     </div>  
                                                   
@@ -382,10 +383,11 @@
                                                     v-on:mouseout="assignIt( $event )" 
                                                     v-bind:style="{backgroundColor: day.color}"  
                                                     v-bind:id="day.dayId"
-                                                    style="z-index:99; user-select: none; border:black 2px solid; min-width:40px; margin:5px; float:left"  
+                                                    style="z-index:99; user-select: none; border:rgb(46, 84, 153) 2px solid; min-width:35px; margin:2px; float:left"  
                                                     >
-                                                      <span>{{ day.dayNum }} <br/> <!-- {{ day.dayName }}<br/> --> {{day.assignedTo}}<br/></span>
-                                                      <span v-if="day.isRejected "><b> X {{ day.isRejected }} </b></span>
+                                                      <span style="text-align:center;">{{ weekDays[ day.dayOfWeek] }} <br/> {{ day.dayNum }} <br/> 
+                                                      <!-- {{ day.dayName }}<br/>{{day.assignedTo}}<br/></span>  --> 
+                                                      <span v-if="day.isRejected " style="colro: red;"><b> X <!-- {{ day.isRejected }} --> </b></span>
                                                       <span v-if="!day.isRejected">&nbsp;</span>
                                                     <!-- -->
                                                     </div>
