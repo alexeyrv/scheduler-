@@ -7,12 +7,36 @@ import Vue from 'https://cdn.jsdelivr.net/npm/vue@latest/dist/vue.esm.browser.mi
 const vm = new Vue({
   el: "#app",
   mounted:function(){
+    /// try get this "data" object stored in localStorage as var named scheduleAppTeam8Data
+    let loadedData = null;
+    let loadedStr = window.localStorage.getItem("scheduleAppTeam8Data");
+    // console.log( "Data after load = ", loadedStr );
+    
+    if( loadedStr == null ){
+      console.log( "No data loaded from the localStorage" );
+    }else{
+      loadedData = JSON.parse( loadedStr ); 
+      
+      console.log( "lets assign loaded data...", loadedData )
+      // init rooms, schedule
+      this.rooms = loadedData.rooms;
+      this.schedule = loadedData.schedule;
+      return;
+    };
+    
+    // how to save to the localStorage 
+    //window.localStorage.setItem("scheduleAppTeam8Data",JSON.stringify( this.data ) );
+
     this.rooms = [];
     this.createSchedule( 2021, "room 0" );
     this.createSchedule( 2021, "room 1" );
     this.createSchedule( 2022, "room 1" );
 
     this.changeRoom( 0 );
+
+    // save "date" to the localStorage the var "scheduleAppTeam8Data"
+    console.log( "data var before store to localStorage: ", this.$data );
+    window.localStorage.setItem("scheduleAppTeam8Data",JSON.stringify( this.$data ) );
   },
 
   data: {
@@ -71,7 +95,10 @@ const vm = new Vue({
       // console.log( "TEST =", this.rooms[0][0].days[0].dayId );
     
       // console.log( "Shedule = ", this.schedule )
-		},
+      
+      // save "date" to the localStorage the var "scheduleAppTeam8Data"
+      window.localStorage.setItem("scheduleAppTeam8Data",JSON.stringify( this.data ) );
+    },
 
     changeRoom: function( roomInd  ){
       this.currentRoom = roomInd;
@@ -148,8 +175,13 @@ const vm = new Vue({
         }
       }
 
-      
-    },
+        // assign current var this.schedule to rooms[this.currentRoom].schedule
+      //this.rooms[ this.currentRoom ].schedule = this.schedule;
+
+      // save "date" to the localStorage the var "scheduleAppTeam8Data"
+      console.log( "RegectIT - store to localStorage: ", this.$data );
+      window.localStorage.setItem("scheduleAppTeam8Data",JSON.stringify( this.$data ) );
+      },
 
   	assignIt: function( event ){ // get ID of clicked element
       // console.log( "Event= ", event);
@@ -199,6 +231,7 @@ const vm = new Vue({
 
       // console.log( "Selected Color= ", this.users[uInd].color );
       this.$set( this.schedule[ (arrId[1]-1) ].days[ (arrId[2]-1) ], 'color',  this.users[uInd].color )
+      this.rooms[ this.currentRoom ].schedule = this.schedule;
 
       //doesn't work now
       // Vue.set( schedule[ arrId[1] ].days[ arrId[2] ], assignedTo, 99 )
@@ -207,7 +240,12 @@ const vm = new Vue({
       
       // console.log( "Schedule: ", this.schedule )
 
-    },
+      // save "date" to the localStorage the var "scheduleAppTeam8Data"
+      console.log( "Assign IT store to localStorage: ", this.$data );
+      window.localStorage.setItem("scheduleAppTeam8Data",JSON.stringify( this.$data ) );
+      },
+
+
   	say: function( msg, event ){ // change element ID by click - just test
     	console.log( "event= ", event );
       this.dcell[0].id = 10;
